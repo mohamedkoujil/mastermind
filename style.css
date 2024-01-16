@@ -164,10 +164,9 @@ button{
     margin-bottom: 10px;
 }
 
-button:hover, button:focus{    
+button:hover{    
     background-color: #1aa1f075;    
     cursor: pointer;
 }
-
 
 
