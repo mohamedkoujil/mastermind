@@ -10,6 +10,10 @@ main{
     display: flex;
 }
 
+.flex-column-reverse{
+    flex-direction: column-reverse;
+}
+
 .wrap{
     flex-wrap: wrap;
 }
@@ -169,4 +173,13 @@ button:hover{
     cursor: pointer;
 }
 
+/*Colors*/
+div.white{background-color: white;}
+div.blue{background-color: blue;}
+div.green{background-color: green;}
+div.violet{background-color: violet}
+div.yellow{background-color: yellow;}
+div.red{background-color: red;}
+div.orange{background-color: orange;}
+div.cyan{background-color: cyan;}
 

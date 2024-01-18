@@ -25,7 +25,9 @@ function init() {
 introducido el usuario.
 Informamos al usuario del resultado y del número de intentos que lleva*/
 function Comprobar() {
+
     for (var i = 0; i < master.length; i++) {
+        //TODO arreglarlo
         if (master[i] == userCombi[i]) {
             aciertos++;
             break;
@@ -33,10 +35,11 @@ function Comprobar() {
             intento++;
             break;
         }
+
     }
+
     let resultContainer = document.querySelector('#Result');
-    resultContainer.appendChild(createRowResult());
-    paintRowCellResult(resultContainer, userCombi);
+    resultContainer.appendChild(createRowResult(userCombi));
     paintCirclesResult(resultContainer, master, userCombi);
     userCombi = [];
     console.log("Aciertos: " + aciertos);
@@ -68,25 +71,25 @@ function generaCombinacion() {
     console.log(master);
 }
 
-function createRowResult() {
+function createRowResult(color) {
     const rowResult = document.createElement('div');
     rowResult.className = 'rowResult w100 flex wrap';
 
-    // Creating the user combination part
+    // Div de la combinación del usuario
     const rowUserCombi = document.createElement('div');
     rowUserCombi.className = 'rowUserCombi w75 flex wrap';
 
-    // Creating cells for the user combination
+    // Creacion de los colores de la combinación del usuario
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
         const celUserCombi = document.createElement('div');
         celUserCombi.className = 'w25';
-        celUserCombi.innerHTML = '<div class="celUserCombi flex"></div>';
+        celUserCombi.innerHTML = '<div class="celUserCombi flex ' + color[i] + '"></div>';
         rowUserCombi.appendChild(celUserCombi);
     }
 
     rowResult.appendChild(rowUserCombi);
 
-    // Creating the result circles part
+    // Creacion de los círculos de resultado
     const rowCercleResult = document.createElement('div');
     rowCercleResult.className = 'rowCercleResult w25 flex wrap center';
 
@@ -103,13 +106,14 @@ function createRowResult() {
     return rowResult;
 }
 
-function paintRowCellResult(rowResult, userCombi) {
+/*function paintRowCellResult(rowResult, userCombi) {
     let rowUserCombi = rowResult.querySelectorAll('.rowUserCombi .flex');
 
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
-        rowUserCombi[i].style.backgroundColor = userCombi[i];
+        rowUserCombi[i].classList.add(userCombi[i]);
     }
-}
+
+}*/
 
 function paintCirclesResult(rowResult, master, userCombi) {
     let rowCercleResult = rowResult.querySelectorAll('.rowCercleResult .flex');
