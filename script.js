@@ -10,13 +10,13 @@ const BLACK = "black";
 //Declaración de variables globales.
 const master = [];
 var userCombi = [];
-var intento = 0;
+var intento = 1;
+var rowResultId = 0;
 var aciertos = 0;
 
 function init() {
     //1. Genera el código random del master
     generaCombinacion();
-    //2. Crea todas las filas según el número de intentos.
 }
 
 
@@ -25,26 +25,42 @@ function init() {
 introducido el usuario.
 Informamos al usuario del resultado y del número de intentos que lleva*/
 function Comprobar() {
+    
+    if(!checkIfCorrect(master, userCombi)) intento++
 
-    for (var i = 0; i < master.length; i++) {
-        //TODO arreglarlo
-        if (master[i] == userCombi[i]) {
-            aciertos++;
-            break;
-        } else {
-            intento++;
-            break;
-        }
+    infoUser (intento)
 
-    }
 
     let resultContainer = document.querySelector('#Result');
     resultContainer.appendChild(createRowResult(userCombi));
+    paintRowCellResult(resultContainer, userCombi)
     paintCirclesResult(resultContainer, master, userCombi);
     userCombi = [];
-    console.log("Aciertos: " + aciertos);
-    console.log("Intentos: " + intento);
+    console.log("Intento num: " + intento);
+    if(checkIfCorrect(master, userCombi)) {
+        generaCombinacion()
+        intento = 0
+    }
 }
+
+function infoUser (intento) {
+    let info = document.querySelector('#info');
+    if (intento>1) info.innerText = "Intento num: " + intento;
+    if (intento>10) info.innerText = "Intento num: " + intento + ', deberias dedicarte a otra cosa';
+    if (intento>15) info.innerText = "Enserio? Llevas " + intento + 'intentos';
+
+    if (checkIfCorrect(master, userCombi)) info.innerText = "¡Felicidades! Lo has conseguido en " + intento + ' intentos';
+}
+
+function checkIfCorrect(master, userCombi) {
+    for (let i = 0; i < MAX_COMBI_COLORES; i++) {
+        if (master[i] != userCombi[i]) {
+            return false
+        } 
+    }
+    return true
+}
+
 
 /** Procedimiento que se ejecuta cada vez que el usuario selecciona un color, hasta el número máximo de colores permitidos en la combinación. */
 function añadeColor(color) {
@@ -72,30 +88,31 @@ function generaCombinacion() {
 }
 
 function createRowResult(color) {
-    const rowResult = document.createElement('div');
+    rowResultId++
+    let rowResult = document.createElement('div');
     rowResult.className = 'rowResult w100 flex wrap';
+    rowResult.id = 'intento' + rowResultId;
 
     // Div de la combinación del usuario
-    const rowUserCombi = document.createElement('div');
+    let rowUserCombi = document.createElement('div');
     rowUserCombi.className = 'rowUserCombi w75 flex wrap';
 
     // Creacion de los colores de la combinación del usuario
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
-        const celUserCombi = document.createElement('div');
+        let celUserCombi = document.createElement('div');
         celUserCombi.className = 'w25';
-        celUserCombi.innerHTML = '<div class="celUserCombi flex ' + color[i] + '"></div>';
+        celUserCombi.innerHTML = '<div class="celUserCombi flex"></div>';
         rowUserCombi.appendChild(celUserCombi);
     }
 
     rowResult.appendChild(rowUserCombi);
 
     // Creacion de los círculos de resultado
-    const rowCercleResult = document.createElement('div');
+    let rowCercleResult = document.createElement('div');
     rowCercleResult.className = 'rowCercleResult w25 flex wrap center';
 
-    // Creating cells for the result circles
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
-        const cercleResultContainer = document.createElement('div');
+        let cercleResultContainer = document.createElement('div');
         cercleResultContainer.className = 'w40 h40';
         cercleResultContainer.innerHTML = '<div class="cercleResult flex"></div>';
         rowCercleResult.appendChild(cercleResultContainer);
@@ -106,18 +123,20 @@ function createRowResult(color) {
     return rowResult;
 }
 
-/*function paintRowCellResult(rowResult, userCombi) {
-    let rowUserCombi = rowResult.querySelectorAll('.rowUserCombi .flex');
+function paintRowCellResult(rowResult, userCombi) {
+    let rowUserCombi = rowResult.querySelectorAll('#intento' + rowResultId + ' .celUserCombi');
+    console.log('#intento' + rowResultId + ' .celUserCombi')
 
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
         rowUserCombi[i].classList.add(userCombi[i]);
     }
 
-}*/
+}
 
 function paintCirclesResult(rowResult, master, userCombi) {
-    let rowCercleResult = rowResult.querySelectorAll('.rowCercleResult .flex');
-
+    let rowCercleResult = rowResult.querySelectorAll('#intento' + rowResultId + ' .cercleResult');
+    //console.log('#intento' + intento + ' .cercleResult')
+    //console.log(rowCercleResult)
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
         if (master[i] == userCombi[i]) {
             rowCercleResult[i].style.backgroundColor = BLACK;
