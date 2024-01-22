@@ -51,11 +51,19 @@ main{
 
 .w8{
     width: 8%;
-    cursor: pointer;    
+    cursor: pointer;  
+    transition: 0.3s;  
 }
+
+.w8:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
 .w90{
     width: 90%;
 }
+
 .w100{
     width: 100%;
 }
@@ -166,11 +174,28 @@ button{
     border-radius: 5px;
     font-size: 1.17em;
     margin-bottom: 10px;
+    transition: 0.3s;
 }
 
 button:hover{    
-    background-color: #1aa1f075;    
+    background-color: #2fabf3;    
     cursor: pointer;
+    transform: scale(1.02);
+}
+
+#combiUsr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    padding-bottom: 0.7em;
+    height: 0.5em;
+}
+
+.infoCombiUsr {
+    height: 35px;
+    width: 35px;
+    border-radius: 25px;
 }
 
 /*Colors*/

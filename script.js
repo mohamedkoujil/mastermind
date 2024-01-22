@@ -8,7 +8,7 @@ const BLACK = "black";
 
 
 //Declaración de variables globales.
-const master = [];
+var master = [];
 var userCombi = [];
 var intento = 1;
 var rowResultId = 0;
@@ -25,38 +25,80 @@ function init() {
 introducido el usuario.
 Informamos al usuario del resultado y del número de intentos que lleva*/
 function Comprobar() {
-    
-    if(!checkIfCorrect(master, userCombi)) intento++
-
-    infoUser (intento)
-
-
     let resultContainer = document.querySelector('#Result');
-    resultContainer.appendChild(createRowResult(userCombi));
-    paintRowCellResult(resultContainer, userCombi)
-    paintCirclesResult(resultContainer, master, userCombi);
+    let infoUserChoices = document.querySelector('#combiUsr');
+
+    if (!checkIfCorrect(master, userCombi)) {
+        intento++;
+        infoUser(intento);
+        resultContainer.appendChild(createRowResult(userCombi));
+        paintRowCellResult(resultContainer, userCombi);
+        paintCirclesResult(resultContainer, master, userCombi);
+    } else {
+        infoUser(intento);
+        resetGame();
+    }
+
     userCombi = [];
     console.log("Intento num: " + intento);
-    if(checkIfCorrect(master, userCombi)) {
-        generaCombinacion()
-        intento = 0
+    infoUserChoices.innerHTML = '';
+}
+
+function continueGame() {
+    // Reset game state or perform any actions needed to continue the game
+    master = [];
+    intento = 1;
+    userCombi = [];
+    rowResultId = 0;
+    aciertos = 0;
+
+    // Clear existing result rows
+    let resultContainer = document.querySelector('#Result');
+    resultContainer.innerHTML = '';
+
+    // Generate a new random combination for the user to guess
+    generaCombinacion();
+
+    // Clear the info section
+    let info = document.querySelector('#info');
+    info.innerHTML = 'Primer intento, suerte!';
+}
+
+
+function infoUser(intento) {
+    let info = document.querySelector('#info');
+
+    if (checkIfCorrect(master, userCombi)) {
+        info.innerHTML = "¡Felicidades! Lo has conseguido en " + intento + ' intentos';
+        // Create a "Continue" button
+        let continueButton = document.createElement('button');
+        continueButton.innerText = 'Continue';
+        continueButton.addEventListener('click', continueGame);
+        info.appendChild(continueButton);
+    } else {
+
+        if (intento > 1) info.innerText = "Intento numero " + intento;
+        if (intento > 10) info.innerText = "Intento numero " + intento + ', deberias dedicarte a otra cosa';
+        if (intento > 15) info.innerText = "Enserio? Llevas " + intento + ' intentos';
+
     }
 }
 
-function infoUser (intento) {
-    let info = document.querySelector('#info');
-    if (intento>1) info.innerText = "Intento num: " + intento;
-    if (intento>10) info.innerText = "Intento num: " + intento + ', deberias dedicarte a otra cosa';
-    if (intento>15) info.innerText = "Enserio? Llevas " + intento + 'intentos';
+function infoUserChoices(color) {
 
-    if (checkIfCorrect(master, userCombi)) info.innerText = "¡Felicidades! Lo has conseguido en " + intento + ' intentos';
+    let container = document.querySelector('#combiUsr');
+    let colorUsrChoice = document.createElement('div');
+    colorUsrChoice.className = "infoCombiUsr " + color
+    if (color == 'white') colorUsrChoice.style.border = '0.5px black solid'
+    container.appendChild(colorUsrChoice);
+
 }
 
 function checkIfCorrect(master, userCombi) {
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
         if (master[i] != userCombi[i]) {
             return false
-        } 
+        }
     }
     return true
 }
@@ -67,9 +109,13 @@ function añadeColor(color) {
     if (userCombi.length < MAX_COMBI_COLORES) {
         userCombi.push(color);
         console.log(userCombi);
+        infoUserChoices(color);
     } else {
+        //TODO cambiar esto
         alert("No puedes añadir más colores");
     }
+
+
 }
 
 //Genera un número aleatorio entre 0 y el número de colores disponibles.
@@ -81,6 +127,8 @@ function generaNum() {
 
 /** Genera la combinación de colores que el usuario debe adivinar. */
 function generaCombinacion() {
+    let info = document.querySelector('#info')
+    info.innerText = 'Primer intento, suerte!'
     for (var i = 0; i < MAX_COMBI_COLORES; i++) {
         master.push(generaNum());
     }
