@@ -38,7 +38,7 @@ function Comprobar() {
         infoUser(intento);
         resetGame();
     }
-
+    pista(intento, master)
     userCombi = [];
     console.log("Intento num: " + intento);
     infoUserChoices.innerHTML = '';
@@ -194,6 +194,21 @@ function paintCirclesResult(rowResult, master, userCombi) {
                 rowCercleResult[i].style.backgroundColor = WHITE;
             }
         }
+    }
+}
+
+function crearBotonPista () {
+
+    let container = document.querySelector('div#infoDiv')
+    let div = document.createElement('p')
+    div.className = 'pista'
+    div.innerText = '💡'
+    container.appendChild(div)
+}
+
+function pista (intento, master) {
+    if (intento >= 1) {
+        crearBotonPista()
     }
 }
 

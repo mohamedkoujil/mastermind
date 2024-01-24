@@ -48,6 +48,9 @@ main{
     width: 75%;    
 }
 
+.w85{
+    width: 85%;    
+}
 
 .w8{
     width: 8%;
@@ -68,12 +71,12 @@ main{
     width: 100%;
 }
 
-.bloqueado{
+/*.bloqueado{
     position: sticky;
     top:0;
     background-color: white;
     z-index: 100;
-}
+}*/
 #white{background-color: white; border: 1px solid black;}
 #blue{background-color: blue;}
 #green{background-color: green;}
@@ -139,6 +142,7 @@ main{
 .comprobar *, .info *{
     margin: 10px;
 }
+
 .info{
     border-color: crimson;
     background-color: crimson;
@@ -196,6 +200,33 @@ button:hover{
     height: 35px;
     width: 35px;
     border-radius: 25px;
+}
+
+#sectionInfo {
+    display: flex;
+}
+
+#infoDiv {
+    display: flex;
+    height: 3em;
+    align-items: center;
+}
+
+#infoDiv p{
+    margin-right: 1em;
+}
+
+#infoDiv .pista {
+    margin-right: 1em;
+    background-color: rgb(226, 135, 153);
+    padding: 0.5em;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+#infoDiv .pista:hover {
+    transform: scale(1.15);
+    cursor: pointer;
 }
 
 /*Colors*/
