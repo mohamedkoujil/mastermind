@@ -1,3 +1,6 @@
+body {
+    background-color:rgba(187, 223, 228, 0.63)
+}
 main {
     padding: 0;
     margin: 0;
@@ -260,8 +263,20 @@ input:hover {
 
 #infoDiv {
     display: flex;
-    height: 3em;
+    justify-content: space-between;
+    height: auto;
     align-items: center;
+}
+
+#info {
+    background-color: #1aa1f0;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 0.5em;
+    height: auto;
+    width: auto;
+    border: 2px solid #318aac;
 }
 
 #infoPista {
@@ -271,7 +286,7 @@ input:hover {
     border-radius: 5px;
     padding: 0.5em;
     height: auto;
-    width: 5em;
+    width: auto;
     transition: 0.3s;
     border: 2px solid #318aac;
 }
@@ -286,6 +301,11 @@ input:hover {
 
 #infoPista:active {
     transform: scale(0.95);
+}
+
+.infoMaxPistas {
+    color: white;
+    width: auto;
 }
 
 

@@ -10,9 +10,11 @@ const BLACK = "black";
 //Declaración de variables globales.
 var master = [];
 var userCombi = [];
+var numsVistos = [];
 var intento = 1;
 var rowResultId = 0;
 var pistaGenerada = false;
+var pistasPorMostrar = 3;
 
 
 function init() {
@@ -37,10 +39,10 @@ function Comprobar() {
         paintCirclesResult(resultContainer, master, userCombi);
     } else {
         infoUser(intento);
-        resetGame();
+
     }
 
-    pista(intento, master, pistaGenerada)
+    if (!pistaGenerada) pista()
 
     userCombi = [];
     console.log("Intento num: " + intento);
@@ -202,40 +204,56 @@ function paintCirclesResult(rowResult, master, userCombi) {
 }
 
 function mostrarPista() {
-    let masterDiv = document.querySelectorAll('#master div div div')
+    if (pistasPorMostrar > 0) {
+        let masterDiv = document.querySelectorAll('#master div div div')
+        let random = Math.floor(Math.random() * master.length)
+        console.log(master)
 
-    console.log(master)
+        do {
+            random = Math.floor(Math.random() * master.length)
+            console.log(random)
+            console.log(numsVistos)
+        } while (numsVistos.includes(random) || userCombi[random] == master[random])
 
-    let random = Math.floor(Math.random() * COLORS.length)
+        numsVistos.push(random)
+        masterDiv[random].style.backgroundColor = master[random]
+        if (master[random] = 'white') masterDiv[random].style.border = 'grey solid 1px'
+        console.log(master[random])
+        actPistasRestantes()
+        pistasPorMostrar--
+    } else {
+        let infoPista = document.querySelector('#infoPista')
+        infoPista.innerText = 'El maxim de pistes és 3'
+        infoPista.classList = 'infoMaxPistas'
+    }
 
-    console.log(random)
-
-    masterDiv[random].style.backgroundColor = master[random]
-    console.log(master[i])
-    
 }
 
-function crearBotonPista () {
+function actPistasRestantes() {
+    let container = document.querySelector('div#infoDiv button');
+    container.innerText = '💡x'+(pistasPorMostrar-1)
+}
+
+function crearBotonPista() {
 
     let container = document.querySelector('div#infoDiv')
     let div = document.createElement('button')
     div.setAttribute("onclick", "mostrarPista()")
     div.id = 'infoPista'
-    div.innerText = '💡'
+    div.innerText = '💡x'+pistasPorMostrar
     container.appendChild(div)
 
 }
 
-function pista (intento, master, pistaGenerada) {
+function pista() {
 
-    if (!pistaGenerada) {
-        if (intento >= 1    ) {
-            console.log(pistaGenerada)
-            pistaGenerada = true
-            crearBotonPista()
-        }
+    if (intento >= 1) {
+        console.log(pistaGenerada)
+        pistaGenerada = true
+        crearBotonPista()
     }
-    
+
+
 }
 
 /** Template con el código HTML que corresponde a cada fila de juego/intento. */
