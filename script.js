@@ -203,6 +203,7 @@ function paintCirclesResult(rowResult, master, userCombi) {
     }
 }
 
+
 function mostrarPista() {
     if (pistasPorMostrar > 0) {
         let masterDiv = document.querySelectorAll('#master div div div')
@@ -217,7 +218,7 @@ function mostrarPista() {
 
         numsVistos.push(random)
         masterDiv[random].style.backgroundColor = master[random]
-        if (master[random] = 'white') masterDiv[random].style.border = 'grey solid 1px'
+        if (master[random] == 'white') masterDiv[random].style.border = 'grey solid 1px'
         console.log(master[random])
         actPistasRestantes()
         pistasPorMostrar--
@@ -247,7 +248,7 @@ function crearBotonPista() {
 
 function pista() {
 
-    if (intento >= 1) {
+    if (intento > 3) {
         console.log(pistaGenerada)
         pistaGenerada = true
         crearBotonPista()
