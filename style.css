@@ -1,4 +1,4 @@
-main{
+main {
     padding: 0;
     margin: 0;
     font-family: 'Lato';
@@ -6,68 +6,72 @@ main{
     margin: 0 auto;
 }
 
-.flex{
+.flex {
     display: flex;
 }
 
-.flex-column-reverse{
+.flex-column-reverse {
     flex-direction: column-reverse;
 }
 
-.wrap{
+.wrap {
     flex-wrap: wrap;
 }
 
-.center{
+.center {
     justify-content: center;
     align-items: center;
     align-content: normal;
 }
 
-.w25{
-    width: 25%;    
+.w25 {
+    width: 25%;
 }
 
-.w50{
-    width: 50%;    
+.w50 {
+    width: 50%;
 }
 
-.h50{
-    height: 50%;    
+.h50 {
+    height: 50%;
 }
 
-.w40{
-    width: 40%;    
+.w40 {
+    width: 40%;
 }
 
-.h40{
-    height: 40%;    
+.h40 {
+    height: 40%;
 }
 
-.w75{
-    width: 75%;    
+.w75 {
+    width: 75%;
 }
 
-.w85{
-    width: 85%;    
+.w85 {
+    width: 85%;
 }
 
-.w8{
+.w8 {
     width: 8%;
-    cursor: pointer;  
-    transition: 0.3s;  
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .w8:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     filter: brightness(1.1);
 }
 
-.w90{
+.w8:active {
+    transform: scale(0.95);
+}
+
+.w90 {
     width: 90%;
 }
 
-.w100{
+.w100 {
     width: 100%;
 }
 
@@ -77,19 +81,54 @@ main{
     background-color: white;
     z-index: 100;
 }*/
-#white{background-color: white; border: 1px solid black;}
-#blue{background-color: blue;}
-#green{background-color: green;}
-#violet{background-color: violet}
-#yellow{background-color: yellow;}
-#red{background-color: red;}
-#orange{background-color: orange;}
-#cyan{background-color: cyan;}
+#white {
+    background-color: white;
+    border: 1px solid black;
+}
 
-.grey{background-color: #BABABA;}
+#blue {
+    background-color: blue;
+}
+
+#green {
+    background-color: green;
+}
+
+#violet {
+    background-color: violet
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#red {
+    background-color: red;
+}
+
+#orange {
+    background-color: orange;
+}
+
+#cyan {
+    background-color: cyan;
+}
+
+.grey {
+    background-color: #BABABA;
+}
 
 /*  */
-.cel{
+
+
+.subtitulo {
+    color: #1aa1f0;
+    display: flex;
+    justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cel {
     height: 82px;
     z-index: 1;
     width: 90%;
@@ -97,14 +136,14 @@ main{
     position: relative;
     margin: 5px auto;
     background-color: grey;
-    border-radius: 10px;    
-    text-align: center;    
+    border-radius: 10px;
+    text-align: center;
     justify-content: center;
     font-size: 2.25em;
     align-items: center;
 }
 
-.celUserCombi{
+.celUserCombi {
     height: 82px;
     z-index: 1;
     width: 90%;
@@ -112,26 +151,33 @@ main{
     position: relative;
     margin: 5px auto;
     background-color: #BABABA;
-    border-radius: 10px;    
-    text-align: center;    
+    border-radius: 10px;
+    text-align: center;
     justify-content: center;
     font-size: 2.25em;
     align-items: center;
-    border: 1px solid  #BABABA;  
+    border: 1px solid #BABABA;
 }
 
-.cercleResult{
+.cercleResult {
     height: 30px;
     z-index: 1;
     width: 30px;
     position: relative;
     margin: 2px auto;
     background-color: grey;
-    border-radius: 50%;  
-    border: 1px solid grey;  
+    border-radius: 50%;
+    border: 1px solid grey;
 }
 
-.comprobar, .info{
+.comprobar {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.comprobar,
+.info {
     border: 1px solid #1aa1f0;
     border-radius: 5px;
     font-size: 1.2em;
@@ -139,22 +185,25 @@ main{
     margin-top: 15px;
 }
 
-.comprobar *, .info *{
+.comprobar *,
+.info * {
     margin: 10px;
 }
 
-.info{
+.info {
     border-color: crimson;
     background-color: crimson;
     color: white;
 }
-label{
+
+label {
     color: #1aa1f0;
     font-weight: bold;
 }
-input{
+
+input {
     box-sizing: border-box;
-    width: 40%;    
+    width: 40%;
     border: none;
     margin-bottom: 15px;
     font-size: 1.2em;
@@ -164,13 +213,12 @@ input{
     border-radius: 5px 5px 0 0;
 }
 
-input:focus, input:hover{    
+input:focus,
+input:hover {
     background-color: #BABABA;
 }
 
-
-button{
-    width: 55%;
+#check {
     padding: 15px;
     background-color: #1aa1f0;
     color: white;
@@ -181,10 +229,14 @@ button{
     transition: 0.3s;
 }
 
-button:hover{    
-    background-color: #2fabf3;    
+#check:hover {
+    background-color: #2fabf3;
     cursor: pointer;
-    transform: scale(1.02);
+    transform: scale(1.01);
+}
+
+#check:active {
+    transform: scale(0.98);
 }
 
 #combiUsr {
@@ -212,30 +264,61 @@ button:hover{
     align-items: center;
 }
 
-#infoDiv p{
-    margin-right: 1em;
-}
-
-#infoDiv .pista {
-    margin-right: 1em;
-    background-color: rgb(226, 135, 153);
+#infoPista {
+    background-color: #1aa1f0;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
     padding: 0.5em;
-    border-radius: 50px;
+    height: auto;
+    width: 5em;
     transition: 0.3s;
+    border: 2px solid #318aac;
 }
 
-#infoDiv .pista:hover {
-    transform: scale(1.15);
+#infoPista:hover {
+    background-color: #2fabf3;
     cursor: pointer;
+    transform: scale(1.05);
+    text-shadow: 0px 0px 15px #fff;
 }
+
+
+#infoPista:active {
+    transform: scale(0.95);
+}
+
+
 
 /*Colors*/
-div.white{background-color: white;}
-div.blue{background-color: blue;}
-div.green{background-color: green;}
-div.violet{background-color: violet}
-div.yellow{background-color: yellow;}
-div.red{background-color: red;}
-div.orange{background-color: orange;}
-div.cyan{background-color: cyan;}
+div.white {
+    background-color: white;
+}
 
+div.blue {
+    background-color: blue;
+}
+
+div.green {
+    background-color: green;
+}
+
+div.violet {
+    background-color: violet
+}
+
+div.yellow {
+    background-color: yellow;
+}
+
+div.red {
+    background-color: red;
+}
+
+div.orange {
+    background-color: orange;
+}
+
+div.cyan {
+    background-color: cyan;
+}

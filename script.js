@@ -12,7 +12,8 @@ var master = [];
 var userCombi = [];
 var intento = 1;
 var rowResultId = 0;
-var aciertos = 0;
+var pistaGenerada = false;
+
 
 function init() {
     //1. Genera el código random del master
@@ -38,7 +39,9 @@ function Comprobar() {
         infoUser(intento);
         resetGame();
     }
-    pista(intento, master)
+
+    pista(intento, master, pistaGenerada)
+
     userCombi = [];
     console.log("Intento num: " + intento);
     infoUserChoices.innerHTML = '';
@@ -82,6 +85,7 @@ function infoUser(intento) {
         if (intento > 15) info.innerText = "Enserio? Llevas " + intento + ' intentos';
 
     }
+
 }
 
 function infoUserChoices(color) {
@@ -197,19 +201,41 @@ function paintCirclesResult(rowResult, master, userCombi) {
     }
 }
 
+function mostrarPista() {
+    let masterDiv = document.querySelectorAll('#master div div div')
+
+    console.log(master)
+
+    let random = Math.floor(Math.random() * COLORS.length)
+
+    console.log(random)
+
+    masterDiv[random].style.backgroundColor = master[random]
+    console.log(master[i])
+    
+}
+
 function crearBotonPista () {
 
     let container = document.querySelector('div#infoDiv')
-    let div = document.createElement('p')
-    div.className = 'pista'
+    let div = document.createElement('button')
+    div.setAttribute("onclick", "mostrarPista()")
+    div.id = 'infoPista'
     div.innerText = '💡'
     container.appendChild(div)
+
 }
 
-function pista (intento, master) {
-    if (intento >= 1) {
-        crearBotonPista()
+function pista (intento, master, pistaGenerada) {
+
+    if (!pistaGenerada) {
+        if (intento >= 1    ) {
+            console.log(pistaGenerada)
+            pistaGenerada = true
+            crearBotonPista()
+        }
     }
+    
 }
 
 /** Template con el código HTML que corresponde a cada fila de juego/intento. */
