@@ -52,10 +52,12 @@ function Comprobar() {
 function continueGame() {
     // Reset game state or perform any actions needed to continue the game
     master = [];
-    intento = 1;
     userCombi = [];
+    numsVistos = [];
+    intento = 1;
     rowResultId = 0;
-    aciertos = 0;
+    pistaGenerada = false;
+    pistasPorMostrar = 3;
 
     // Clear existing result rows
     let resultContainer = document.querySelector('#Result');
@@ -65,27 +67,25 @@ function continueGame() {
     generaCombinacion();
 
     // Clear the info section
-    let info = document.querySelector('#info');
-    info.innerHTML = 'Primer intento, suerte!';
+    let info = document.querySelector('#infoDiv');
+    info.innerHTML = '<p class="w90" id="info">Primer intento, suerte!</p>';
 }
 
 
 function infoUser(intento) {
-    let info = document.querySelector('#info');
+    let infoDiv = document.querySelector('#infoDiv');
 
     if (checkIfCorrect(master, userCombi)) {
-        info.innerHTML = "¡Felicidades! Lo has conseguido en " + intento + ' intentos';
+        if (intento == 1)info.innerHTML = "¡Felicidades! Lo has conseguido a la primera";
+        else info.innerHTML = "¡Felicidades! Lo has conseguido en " + intento + ' intentos';
         // Create a "Continue" button
         let continueButton = document.createElement('button');
+        continueButton.id = "continueButton"
         continueButton.innerText = 'Continue';
         continueButton.addEventListener('click', continueGame);
-        info.appendChild(continueButton);
+        infoDiv.appendChild(continueButton);
     } else {
-
-        if (intento > 1) info.innerText = "Intento numero " + intento;
-        if (intento > 10) info.innerText = "Intento numero " + intento + ', deberias dedicarte a otra cosa';
-        if (intento > 15) info.innerText = "Enserio? Llevas " + intento + ' intentos';
-
+        info.innerText = "Intento numero " + intento;
     }
 
 }
