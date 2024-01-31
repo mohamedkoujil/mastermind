@@ -22,6 +22,19 @@ function init() {
     generaCombinacion();
 }
 
+function modificadorDOM(tag, id, clase, texto, padre) {
+    let elemento = document.createElement(tag);
+    elemento.id = id;
+    elemento.className = clase;
+    elemento.innerText = texto;
+    padre.appendChild(elemento);
+}
+
+function modificarElementoDOM(id, texto) {
+    let elemento = document.querySelector(id);
+    elemento.innerText = texto;
+}
+
 
 
 /* Llamaremos a esta función desde el botón HTML de la página para comprobar la propuesta de combinación que nos ha
@@ -73,19 +86,18 @@ function continueGame() {
 
 
 function infoUser(intento) {
-    let infoDiv = document.querySelector('#infoDiv');
 
     if (checkIfCorrect(master, userCombi)) {
-        if (intento == 1)info.innerHTML = "¡Felicidades! Lo has conseguido a la primera";
-        else info.innerHTML = "¡Felicidades! Lo has conseguido en " + intento + ' intentos';
+        //Borramos el contenido del div infoDiv
+        modificarElementoDOM('#infoDiv', '');
+        if (intento == 1) modificadorDOM('p', 'info', 'w90', '¡Felicidades! Lo has conseguido en a la primera', infoDiv);
+        else modificadorDOM('p', 'info', 'w90', '¡Felicidades! Lo has conseguido en ' + intento + ' intentos', infoDiv);
         // Create a "Continue" button
-        let continueButton = document.createElement('button');
-        continueButton.id = "continueButton"
-        continueButton.innerText = 'Continue';
+        modificadorDOM('button', 'continue', 'w90', 'Continuar', infoDiv);
+        let continueButton = document.querySelector('#continue');
         continueButton.addEventListener('click', continueGame);
-        infoDiv.appendChild(continueButton);
     } else {
-        info.innerText = "Intento numero " + intento;
+        modificarElementoDOM('#info', 'Intento ' + intento );
     }
 
 }

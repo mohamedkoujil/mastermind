@@ -57,12 +57,11 @@ main {
 .w8 {
     width: 8%;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.1s;
 }
 
 .w8:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
+    filter: brightness(0.75);
 }
 
 .w8:active {
@@ -286,7 +285,7 @@ input:hover {
     padding: 0.5em;
     height: auto;
     width: auto;
-    transition: 0.3s;
+    transition: 0.1s;
     border: 2px solid #318aac;
 }
 
@@ -311,6 +310,25 @@ input:hover {
     background-color: #1aa1f0;
 }
 
+#continue {
+    background-color: #1aa1f0;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 0.5em;
+    height: auto;
+    width: auto;
+    border: 2px solid #318aac;
+    transition: 0.1s;
+    color: white;
+}
+
+#continue:hover {
+    background-color: #2fabf3;
+    cursor: pointer;
+    transform: scale(1.05);
+    
+}
 
 
 /*Colors*/
