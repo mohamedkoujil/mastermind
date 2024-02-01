@@ -16,7 +16,6 @@ var rowResultId = 0;
 var pistaGenerada = false;
 var pistasPorMostrar = 3;
 
-
 function init() {
     //1. Genera el código random del master
     generaCombinacion();
@@ -37,9 +36,6 @@ function modificarElementoDOM(id, texto) {
 
 
 
-/* Llamaremos a esta función desde el botón HTML de la página para comprobar la propuesta de combinación que nos ha
-introducido el usuario.
-Informamos al usuario del resultado y del número de intentos que lleva*/
 function Comprobar() {
     let resultContainer = document.querySelector('#Result');
     let infoUserChoices = document.querySelector('#combiUsr');
@@ -54,7 +50,6 @@ function Comprobar() {
         infoUser(intento);
 
     }
-
     if (!pistaGenerada) pista()
 
     userCombi = [];
@@ -72,16 +67,22 @@ function continueGame() {
     pistaGenerada = false;
     pistasPorMostrar = 3;
 
-    // Clear existing result rows
+    // Borrar resultats
     let resultContainer = document.querySelector('#Result');
     resultContainer.innerHTML = '';
 
-    // Generate a new random combination for the user to guess
+    // Nova combinació
     generaCombinacion();
 
-    // Clear the info section
+    // Borrar secció info
     let info = document.querySelector('#infoDiv');
     info.innerHTML = '<p class="w90" id="info">Primer intento, suerte!</p>';
+
+    // Borrar master
+    let masterCells = document.querySelectorAll('#master div div')
+    for (let i of masterCells) {
+        i.style.backgroundColor = ''
+    }
 }
 
 
@@ -132,8 +133,6 @@ function añadeColor(color) {
         //TODO cambiar esto
         alert("No puedes añadir más colores");
     }
-
-
 }
 
 //Genera un número aleatorio entre 0 y el número de colores disponibles.
@@ -153,7 +152,7 @@ function generaCombinacion() {
     console.log(master);
 }
 
-function createRowResult(color) {
+function createRowResult() {
     rowResultId++
     let rowResult = document.createElement('div');
     rowResult.className = 'rowResult w100 flex wrap';
@@ -201,8 +200,6 @@ function paintRowCellResult(rowResult, userCombi) {
 
 function paintCirclesResult(rowResult, master, userCombi) {
     let rowCercleResult = rowResult.querySelectorAll('#intento' + rowResultId + ' .cercleResult');
-    //console.log('#intento' + intento + ' .cercleResult')
-    //console.log(rowCercleResult)
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
         if (master[i] == userCombi[i]) {
             rowCercleResult[i].style.backgroundColor = BLACK;
@@ -217,6 +214,7 @@ function paintCirclesResult(rowResult, master, userCombi) {
 
 
 function mostrarPista() {
+
     if (pistasPorMostrar > 0) {
         let masterDiv = document.querySelectorAll('#master div div div')
         let random = Math.floor(Math.random() * master.length)
@@ -229,17 +227,22 @@ function mostrarPista() {
         } while (numsVistos.includes(random) || userCombi[random] == master[random])
 
         numsVistos.push(random)
-        masterDiv[random].style.backgroundColor = master[random]
-        if (master[random] == 'white') masterDiv[random].style.border = 'grey solid 1px'
+        pintarMaster(masterDiv, random)
         console.log(master[random])
         actPistasRestantes()
         pistasPorMostrar--
+        
     } else {
         let infoPista = document.querySelector('#infoPista')
         infoPista.innerText = 'El maxim de pistes és 3'
         infoPista.classList = 'infoMaxPistas'
     }
 
+}
+
+function pintarMaster (masterDiv, random) {
+    masterDiv[random].style.backgroundColor = master[random]
+    if (master[random] == 'white') masterDiv[random].style.border = 'grey solid 1px'
 }
 
 function actPistasRestantes() {
@@ -266,40 +269,4 @@ function pista() {
         crearBotonPista()
     }
 
-
 }
-
-/** Template con el código HTML que corresponde a cada fila de juego/intento. */
-/*
-const ROW_RESULT = 
-<div class="rowResult w100 flex wrap">
-    <div class="rowUserCombi w75 flex wrap">
-       <div class="w25">
-           <div class="celUserCombi flex"></div>
-       </div>
-       <div class="w25">
-           <div class="celUserCombi flex"></div>
-       </div>
-       <div class="w25">
-           <div class="celUserCombi flex"></div>
-       </div>
-       <div class="w25">
-           <div class="celUserCombi flex"></div>
-       </div>
-    </div>
-    <div class="rowCercleResult w25 flex wrap center">
-       <div class="w40 h40">
-            <div class="cercleResult flex"></div>
-       </div>
-       <div class="w40 h40">
-           <div class="cercleResult flex"></div>
-       </div>
-       <div class="w40 h40">
-           <div class="cercleResult flex"></div>
-       </div>
-       <div class="w40 h40">
-           <div class="cercleResult flex"></div>
-       </div>
-    </div>
-</div>
-*/

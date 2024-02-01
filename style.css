@@ -1,7 +1,7 @@
 body {
     display: flex;
     justify-content: center;
-    background-color:rgba(187, 223, 228, 0.63);
+    background-color:rgb(220, 255, 250);
 }
 main {
     font-family: 'Lato';
@@ -24,6 +24,12 @@ main {
     justify-content: center;
     align-items: center;
     align-content: normal;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    color: #1aa1f0;
 }
 
 .w25 {
@@ -231,9 +237,8 @@ input:hover {
 }
 
 #check:hover {
-    background-color: #2fabf3;
+    filter: brightness(0.9);
     cursor: pointer;
-    transform: scale(1.01);
 }
 
 #check:active {
@@ -279,6 +284,7 @@ input:hover {
 
 #infoPista {
     background-color: #1aa1f0;
+    color: white;
     border: none;
     font-size: 18px;
     border-radius: 5px;
@@ -306,9 +312,6 @@ input:hover {
     width: auto;
 }
 
-#continueButton {
-    background-color: #1aa1f0;
-}
 
 #continue {
     background-color: #1aa1f0;
