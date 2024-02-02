@@ -15,6 +15,7 @@ var intento = 1;
 var rowResultId = 0;
 var pistaGenerada = false;
 var pistasPorMostrar = 3;
+var adivinados = []
 
 function init() {
     //1. Genera el código random del master
@@ -203,10 +204,13 @@ function paintCirclesResult(rowResult, master, userCombi) {
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
         if (master[i] == userCombi[i]) {
             rowCercleResult[i].style.backgroundColor = BLACK;
+            adivinados.push(userCombi[i])
 
         } else {
             if (master.includes(userCombi[i])) {
-                rowCercleResult[i].style.backgroundColor = WHITE;
+                console.log("asd" + adivinados)
+                if (!adivinados.includes(userCombi[i])) rowCercleResult[i].style.backgroundColor = WHITE;
+                else rowCercleResult[i].style.backgroundColor = GREY;
             }
         }
     }
