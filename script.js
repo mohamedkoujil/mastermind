@@ -138,8 +138,10 @@ function añadeColor(color) {
 
 //Genera un número aleatorio entre 0 y el número de colores disponibles.
 function generaNum() {
-    var random = Math.floor(Math.random() * COLORS.length);
-    console.log("Random: " + random);
+    do {
+        var random = Math.floor(Math.random() * COLORS.length);
+        console.log("Random: " + random);
+    } while(master.includes(COLORS[random]))
     return COLORS[random];
 }
 
