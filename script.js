@@ -55,7 +55,6 @@ function Comprobar() {
     if (!pistaGenerada) pista();
 
     userCombi = [];
-    console.log("Intento num: " + intento);
     infoUserChoices.innerHTML = '';
 }
 
@@ -77,6 +76,10 @@ function continueGame() {
     // Generar nueva combinación.
     generaCombinacion();
 
+    // Quitar la clase center del div infoDiv.
+    let infoDiv = document.querySelector('#infoDiv');
+    infoDiv.classList.remove('center');
+
     // Borrar sección de información.
     let info = document.querySelector('#infoDiv');
     info.innerHTML = '<p class="w90" id="info">Primer intento, ¡suerte!</p>';
@@ -91,6 +94,7 @@ function continueGame() {
     let checkButton = document.querySelector('#check');
     checkButton.setAttribute("onclick", "Comprobar()");
     checkButton.innerText = 'Comprobar';
+
 }
 
 // Procedimiento para mostrar información al usuario.
@@ -100,7 +104,7 @@ function infoUser(intento) {
         // Añadir efecto de confeti en caso de victoria.   
         jsConfetti.addConfetti(); 
 
-        // Borrar el contenido del div infoDiv.
+        // Borrar el contenido del div infoDiv y centrar el contenido.
         modificarElementoDOM('#infoDiv', '', 'center');
 
         // Mostrar mensaje de felicitaciones y botón de continuar.
@@ -140,7 +144,6 @@ function checkIfCorrect(master, userCombi) {
 function añadeColor(color) {
     if (userCombi.length < MAX_COMBI_COLORES) {
         userCombi.push(color);
-        console.log(userCombi);
         infoUserChoices(color);
     } else {
         alert("No puedes añadir más colores"); // TODO: Cambiar esto.
@@ -151,7 +154,6 @@ function añadeColor(color) {
 function generaNum() {
     do {
         var random = Math.floor(Math.random() * COLORS.length);
-        console.log("Random: " + random);
     } while (master.includes(COLORS[random]));
     return COLORS[random];
 }
@@ -206,7 +208,6 @@ function createRowResult() {
 // Pintar los colores de la combinación del usuario en la fila de resultados.
 function paintRowCellResult(rowResult, userCombi) {
     let rowUserCombi = rowResult.querySelectorAll('#intento' + rowResultId + ' .celUserCombi');
-    console.log('#intento' + rowResultId + ' .celUserCombi');
 
     for (let i = 0; i < MAX_COMBI_COLORES; i++) {
         rowUserCombi[i].classList.add(userCombi[i]);
@@ -222,7 +223,6 @@ function paintCirclesResult(rowResult, master, userCombi) {
             adivinados.push(userCombi[i]);
         } else {
             if (master.includes(userCombi[i])) {
-                console.log("asd" + adivinados);
                 if (!adivinados.includes(userCombi[i])) rowCercleResult[i].style.backgroundColor = WHITE;
                 else rowCercleResult[i].style.backgroundColor = GREY;
             }
@@ -235,17 +235,13 @@ function mostrarPista() {
     if (pistasPorMostrar > 0) {
         let masterDiv = document.querySelectorAll('#master div div div');
         let random = Math.floor(Math.random() * master.length);
-        console.log(master);
 
         do {
             random = Math.floor(Math.random() * master.length);
-            console.log(random);
-            console.log(numsVistos);
         } while (numsVistos.includes(random) || userCombi[random] == master[random]);
 
         numsVistos.push(random);
         pintarMaster(masterDiv, random);
-        console.log(master[random]);
         actPistasRestantes();
         pistasPorMostrar--;
     } else {
@@ -280,7 +276,6 @@ function crearBotonPista() {
 // Generar una pista después de ciertos intentos.
 function pista() {
     if (intento > 3) {
-        console.log(pistaGenerada);
         pistaGenerada = true;
         crearBotonPista();
     }
