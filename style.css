@@ -20,6 +20,10 @@ main {
     flex-wrap: wrap;
 }
 
+.spaceBetween {
+    justify-content: space-between;
+}
+
 .center {
     justify-content: center;
     align-items: center;
@@ -266,7 +270,6 @@ input:hover {
 
 #infoDiv {
     display: flex;
-    justify-content: space-between;
     height: auto;
     align-items: center;
 }
@@ -332,6 +335,7 @@ input:hover {
     transform: scale(1.05);
     
 }
+
 
 
 /*Colors*/
